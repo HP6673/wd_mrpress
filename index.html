@@ -23,20 +23,32 @@
 
   body {
     font-family: 'DM Sans', sans-serif;
-    background: var(--cream);
+    background: var(--navy);
     color: var(--navy);
     overflow-x: hidden;
   }
 
+  /* ── NAV LOGO HOVER ── */
+  .nav-logo:hover { opacity: 0.85; transition: opacity 0.2s; }
+
   /* ── NAV ── */
   nav {
-    position: fixed; top: 0; width: 100%; z-index: 1000;
-    background: rgba(10,22,40,0.96);
-    backdrop-filter: blur(12px);
+    position: fixed;
+    top: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% - 3rem);
+    max-width: 1060px;
+    z-index: 1000;
+    background: rgba(10,22,40,0.92);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     display: flex; align-items: center; justify-content: space-between;
-    padding: 0 5%;
-    height: 70px;
-    border-bottom: 1px solid rgba(201,168,76,0.2);
+    padding: 0 1.8rem;
+    height: 58px;
+    border-radius: 100px;
+    border: 1px solid rgba(201,168,76,0.28);
+    box-shadow: 0 8px 40px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.04) inset;
   }
   .nav-logo {
     font-family: 'Playfair Display', serif;
@@ -73,7 +85,7 @@
     background: var(--navy);
     position: relative;
     overflow: hidden;
-    padding-top: 70px;
+    padding-top: 100px;
   }
   .hero-grid {
     position: absolute; inset: 0;
@@ -204,8 +216,14 @@
 
   .cards-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
     gap: 1.5rem;
+  }
+  @media (max-width: 900px) {
+    .cards-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 580px) {
+    .cards-grid { grid-template-columns: 1fr; }
   }
   .card {
     background: var(--cream);
@@ -230,7 +248,7 @@
   .card p { font-size: 0.9rem; color: var(--grey); line-height: 1.65; }
 
   /* ── BENEFITS PAGE ── */
-  #benefits { background: var(--cream); padding-top: 70px; }
+  #benefits { background: var(--cream); padding-top: 100px; }
   .benefits-hero {
     background: var(--navy);
     padding: 5rem 5% 4rem;
@@ -287,7 +305,7 @@
   .benefit-cta .section-sub { color: rgba(255,255,255,0.6); margin: 0 auto 2.5rem; }
 
   /* ── HOW IT WORKS ── */
-  #process { background: var(--cream); padding-top: 70px; }
+  #process { background: var(--cream); padding-top: 100px; }
   .process-hero {
     background: linear-gradient(135deg, #0a1628 0%, #1a2d4a 100%);
     padding: 5rem 5% 4rem;
@@ -392,7 +410,7 @@
   }
 
   /* ── CONTACT ── */
-  #contact { background: var(--cream); padding-top: 70px; }
+  #contact { background: var(--cream); padding-top: 100px; }
   .contact-hero {
     background: var(--navy);
     padding: 5rem 5% 4rem;
@@ -527,15 +545,90 @@
   .pricing-section .section-title { margin-bottom: 0.5rem; }
   .pricing-section .section-sub { margin: 0 auto 3rem; }
 
-  /* ── ANIMATIONS ── */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(24px); }
-    to { opacity: 1; transform: translateY(0); }
+  /* ── HAMBURGER BUTTON ── */
+  .nav-hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    width: 40px; height: 40px;
+    background: transparent;
+    border: 1px solid rgba(201,168,76,0.35);
+    border-radius: 8px;
+    cursor: pointer;
+    padding: 0;
+    flex-shrink: 0;
+  }
+  .nav-hamburger span {
+    display: block;
+    width: 20px; height: 2px;
+    background: var(--gold);
+    border-radius: 2px;
+    transition: all 0.3s ease;
+  }
+  .nav-hamburger.open span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+  .nav-hamburger.open span:nth-child(2) {
+    opacity: 0; transform: scaleX(0);
+  }
+  .nav-hamburger.open span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  /* ── MOBILE DRAWER ── */
+  .mobile-menu {
+    display: none;
+    position: fixed;
+    top: 90px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% - 3rem);
+    max-width: 1060px;
+    background: rgba(10,22,40,0.97);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(201,168,76,0.28);
+    border-radius: 20px;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.5);
+    z-index: 999;
+    padding: 1rem 1.5rem 1.5rem;
+    flex-direction: column;
+    gap: 0.25rem;
+    animation: menuDrop 0.2s ease;
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a {
+    color: rgba(255,255,255,0.8);
+    text-decoration: none;
+    font-size: 1rem; font-weight: 500;
+    padding: 0.85rem 1rem;
+    border-radius: 10px;
+    transition: all 0.2s;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .mobile-menu a:last-child { border-bottom: none; }
+  .mobile-menu a:hover { background: rgba(201,168,76,0.1); color: var(--gold); }
+  .mobile-menu .mobile-cta {
+    background: var(--gold);
+    color: var(--navy) !important;
+    text-align: center;
+    font-weight: 600 !important;
+    margin-top: 0.5rem;
+    border-bottom: none !important;
+  }
+  .mobile-menu .mobile-cta:hover { background: var(--gold-light) !important; }
+
+  @keyframes menuDrop {
+    from { opacity: 0; transform: translateX(-50%) translateY(-8px); }
+    to   { opacity: 1; transform: translateX(-50%) translateY(0); }
   }
 
   /* ── RESPONSIVE ── */
   @media (max-width: 768px) {
     .nav-links { display: none; }
+    .nav-hamburger { display: flex; }
     .benefits-list { grid-template-columns: 1fr; }
     .contact-body { grid-template-columns: 1fr; }
     .process-line { display: none; }
@@ -547,20 +640,29 @@
 
 <!-- NAV -->
 <nav>
-  <div class="nav-logo">MrPress <span>Web Design</span></div>
+  <div class="nav-logo" onclick="show('home')" style="cursor:pointer;">MrPress <span>Web Design</span></div>
   <ul class="nav-links">
-    <li><a href="#" onclick="show('home')">Home</a></li>
     <li><a href="#" onclick="show('benefits')">Why Own a Site?</a></li>
     <li><a href="#" onclick="show('process')">How It Works</a></li>
     <li><a href="#" onclick="show('contact')" class="nav-cta">Get a Free Quote</a></li>
   </ul>
+  <button class="nav-hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+
+<!-- MOBILE MENU DRAWER -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#" onclick="showMobile('benefits')">Why Own a Site?</a>
+  <a href="#" onclick="showMobile('process')">How It Works</a>
+  <a href="#" onclick="showMobile('contact')" class="mobile-cta">Get a Free Quote</a>
+</div>
 
 <!-- ══════════════════ HOME ══════════════════ -->
 <section id="home" class="active">
 
   <!-- Hero -->
-  <div style="background:var(--navy); min-height:100vh; padding-top:70px; position:relative; overflow:hidden;">
+  <div style="background:var(--navy); min-height:100vh; padding-top:90px; position:relative; overflow:hidden;">
     <div class="hero-grid"></div>
     <div class="hero-glow"></div>
     <div class="hero-content">
@@ -607,9 +709,19 @@
           <h3>Win High-Value Clients</h3>
           <p>Luxury buyers and serious sellers research their agent before reaching out. A polished site signals credibility and commitment.</p>
         </div>
+        <div class="card">
+          <span class="card-icon">⭐</span>
+          <h3>Showcase Your Reviews</h3>
+          <p>You've earned those five-star reviews — show them off. Your personal site puts your reputation front and center where clients can see it.</p>
+        </div>
+        <div class="card">
+          <span class="card-icon">🔄</span>
+          <h3>Survive Brokerage Changes</h3>
+          <p>Switch firms without losing your online presence. Your domain, your Google ranking, and your client base stay intact no matter what.</p>
+        </div>
       </div>
       <div style="text-align:center; margin-top:3rem;">
-        <button class="btn-primary" onclick="show('benefits')">See All 8 Benefits →</button>
+        <button class="btn-primary" onclick="show('benefits')">View All Benefits →</button>
       </div>
     </div>
   </div>
@@ -647,7 +759,7 @@
 
   <footer>
     <div class="footer-logo">MrPress <span>Web Design</span></div>
-    <p>© MrPress LLC · Websites Built for Real Estate Professionals</p>
+    <p>© 2025 MrPress LLC · All Rights Reserved · Websites Built for Real Estate Professionals</p>
   </footer>
 </section>
 
@@ -727,7 +839,7 @@
 
   <footer>
     <div class="footer-logo">MrPress <span>Web Design</span></div>
-    <p>© 2025 Web-Design by MrPress · Websites Built for Real Estate Professionals</p>
+    <p>© 2025 MrPress LLC · All Rights Reserved · Websites Built for Real Estate Professionals</p>
   </footer>
 </section>
 
@@ -828,7 +940,7 @@
           </div>
           <div class="addon">
             <div class="addon-name">📧 Email Setup</div>
-            <div class="addon-desc">yourname@yourdomain.com pro email</div>
+            <div class="addon-desc"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c7bea8b2b5a9a6aaa287bea8b2b5a3a8aaa6aea9e9a4a8aa">[email&#160;protected]</a> pro email</div>
             <div class="addon-price">Quote on request</div>
           </div>
           <div class="addon">
@@ -852,7 +964,7 @@
 
   <footer>
     <div class="footer-logo">MrPress <span>Web Design</span></div>
-    <p>© 2025 Web-Design by MrPress · Websites Built for Real Estate Professionals</p>
+    <p>© 2025 MrPress LLC · All Rights Reserved · Websites Built for Real Estate Professionals</p>
   </footer>
 </section>
 
@@ -952,16 +1064,42 @@
 
   <footer>
     <div class="footer-logo">MrPress <span>Web Design</span></div>
-    <p>© 2025 Web-Design by MrPress · Websites Built for Real Estate Professionals</p>
+    <p>© 2025 MrPress LLC · All Rights Reserved · Websites Built for Real Estate Professionals</p>
   </footer>
 </section>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   function show(page) {
     document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
     document.getElementById(page).classList.add('active');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
+
+  function toggleMenu() {
+    const menu = document.getElementById('mobileMenu');
+    const btn  = document.getElementById('hamburger');
+    menu.classList.toggle('open');
+    btn.classList.toggle('open');
+  }
+
+  function showMobile(page) {
+    // close drawer then navigate
+    document.getElementById('mobileMenu').classList.remove('open');
+    document.getElementById('hamburger').classList.remove('open');
+    show(page);
+  }
+
+  // close drawer if user taps outside of it
+  document.addEventListener('click', function(e) {
+    const menu = document.getElementById('mobileMenu');
+    const btn  = document.getElementById('hamburger');
+    if (menu.classList.contains('open') &&
+        !menu.contains(e.target) &&
+        !btn.contains(e.target)) {
+      menu.classList.remove('open');
+      btn.classList.remove('open');
+    }
+  });
 
   function submitForm() {
     const fname = document.getElementById('fname').value.trim();
