@@ -1,0 +1,38 @@
+# ==============================================================================
+# CODEOWNERS — MrPress LLC
+# https://github.com/HP6673
+# © 2025 MrPress LLC. All Rights Reserved.
+# ==============================================================================
+#
+# This file declares the ownership of all files in this repository.
+# GitHub uses this file to automatically request reviews from the listed
+# owners whenever a pull request modifies files they own.
+#
+# MrPress LLC is the sole owner of all files in this repository.
+# No pull requests, contributions, patches, or modifications from external
+# parties are accepted, solicited, or authorized without prior Written
+# Permission from MrPress LLC as defined in the LICENSE.txt.
+#
+# Any unsolicited pull request will be closed without review.
+#
+# Format: <file pattern>  <owner>
+# ------------------------------------------------------------------------------
+
+# Global rule — HP6673 owns every file in the entire repository.
+*       @HP6673
+
+# Explicitly declare ownership of all key files individually.
+/index.html                         @HP6673
+/README.md                          @HP6673
+/LICENSE.txt                        @HP6673
+/SECURITY.md                        @HP6673
+/CODEOWNERS                         @HP6673
+/.gitignore                         @HP6673
+/robots.txt                         @HP6673
+/sitemap.xml                        @HP6673
+/CHANGELOG.md                       @HP6673
+
+# Any future directories and their contents.
+/.github/                           @HP6673
+/assets/                            @HP6673
+/docs/                              @HP6673
